@@ -6,16 +6,26 @@ class QuestionOutput {
     int questionId;
     String questionText;
     int quizId;
+    int count;
     List<OptionOutput> options;
 
     public QuestionOutput() {
     }
 
-    public QuestionOutput(int questionId, String questionText, int quizId, List<OptionOutput> options) {
+    public QuestionOutput(int questionId, String questionText, int quizId, List<OptionOutput> options, int count) {
         this.questionId = questionId;
         this.quizId = quizId;
         this.questionText = questionText;
+        this.count = count;
         this.options = options;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public int getQuizId() {

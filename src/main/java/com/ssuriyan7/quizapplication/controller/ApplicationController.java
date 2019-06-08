@@ -56,7 +56,7 @@ public class ApplicationController {
                 optionOutput.add(new OptionOutput(tempOptions.get(j).getId(),tempOptions.get(j).getOptionText(),tempOptions.get(j).isCorrect(),tempOptions.get(j).getQuestion().getId(),false));
             }
             System.out.println(optionOutput);
-            QuestionOutput questionOutput = new QuestionOutput(questions.get(i).getId(),questions.get(i).getQuestionText(),questions.get(i).getQuiz().getId(),optionOutput);
+            QuestionOutput questionOutput = new QuestionOutput(questions.get(i).getId(),questions.get(i).getQuestionText(),questions.get(i).getQuiz().getId(),optionOutput, questions.size());
             questionOutputs.add(questionOutput);
         }
         return questionOutputs;
