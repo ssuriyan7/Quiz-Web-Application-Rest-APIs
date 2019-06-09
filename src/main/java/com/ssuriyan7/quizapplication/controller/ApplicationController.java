@@ -3,9 +3,11 @@ package com.ssuriyan7.quizapplication.controller;
 import com.ssuriyan7.quizapplication.entity.Option;
 import com.ssuriyan7.quizapplication.entity.Question;
 import com.ssuriyan7.quizapplication.entity.Quiz;
+import com.ssuriyan7.quizapplication.entity.Result;
 import com.ssuriyan7.quizapplication.repository.OptionRepository;
 import com.ssuriyan7.quizapplication.repository.QuestionRepository;
 import com.ssuriyan7.quizapplication.repository.QuizRepository;
+import com.ssuriyan7.quizapplication.repository.ResultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
@@ -23,6 +25,9 @@ public class ApplicationController {
 
     @Autowired
     private OptionRepository optionRepository;
+
+    @Autowired
+    private ResultRepository resultRepository;
 
     @PostMapping("/insertQuiz")
     public Quiz insertQuiz(@RequestBody String quizName) {
@@ -46,7 +51,6 @@ public class ApplicationController {
         for (int i = 0; i < questions.size(); i++) {
             List<Option> options = optionRepository.findByQuestionId(questions.get(i).getId());
             questions.get(i).setOptions(options);
-            //System.out.println(questions.get(i).getOptions());
         }
         List<QuestionOutput> questionOutputs = new ArrayList<QuestionOutput>();
         for(int i = 0; i < questions.size(); i++) {
@@ -67,5 +71,16 @@ public class ApplicationController {
         for (int i = 0; i < options.length; i++) {
             optionRepository.save(new Option(options[i].getOptionText(),options[i].isCorrect(),options[i].getQuestion()));
         }
+    }
+
+    @PostMapping("/insertResult")
+    public void insertResult(@RequestBody Result result) {
+        Quiz q = quizRepository.getOne(result.getQuiz().getId());
+        resultRepository.save(new Result(result.getUserName(),result.getScore(),q));
+    }
+
+    @GetMapping("/getResults")
+    public List<Result> getResults(@RequestParam("quizid") String quizid) {
+        return resultRepository.findByQuizId(Integer.parseInt(quizid));
     }
 }
