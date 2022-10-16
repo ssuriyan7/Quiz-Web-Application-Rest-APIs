@@ -1,18 +1,18 @@
-package com.ssuriyan7.quizapplication.controller;
+package com.ssuriyan7.quizapplication.dto;
 
 import java.util.List;
 
-class QuestionOutput {
+public class QuestionOutputDto {
     int questionId;
     String questionText;
     int quizId;
     int count;
-    List<OptionOutput> options;
+    List<OptionOutputDto> options;
 
-    public QuestionOutput() {
+    public QuestionOutputDto() {
     }
 
-    public QuestionOutput(int questionId, String questionText, int quizId, List<OptionOutput> options, int count) {
+    public QuestionOutputDto(int questionId, String questionText, int quizId, List<OptionOutputDto> options, int count) {
         this.questionId = questionId;
         this.quizId = quizId;
         this.questionText = questionText;
@@ -52,11 +52,11 @@ class QuestionOutput {
         this.questionText = questionText;
     }
 
-    public List<OptionOutput> getOptions() {
+    public List<OptionOutputDto> getOptions() {
         return options;
     }
 
-    public void setOptions(List<OptionOutput> options) {
+    public void setOptions(List<OptionOutputDto> options) {
         this.options = options;
     }
 }

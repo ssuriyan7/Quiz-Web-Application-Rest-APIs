@@ -11,7 +11,7 @@
     <groupId>com.ssuriyan7</groupId>
     <artifactId>quizapplication</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>quizapplication</name>
     <description>Quiz application using Spring Boot</description>
 

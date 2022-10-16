@@ -1,13 +1,13 @@
-package com.ssuriyan7.quizapplication.controller;
+package com.ssuriyan7.quizapplication.dto;
 
-class OptionOutput {
+public class OptionOutputDto {
     int optionId;
     String optionText;
     boolean correct;
     int questionId;
     boolean selected;
 
-    public OptionOutput(int optionId, String optionText, boolean correct,int questionId, boolean selected) {
+    public OptionOutputDto(int optionId, String optionText, boolean correct, int questionId, boolean selected) {
         this.optionId = optionId;
         this.optionText = optionText;
         this.correct = correct;
@@ -42,7 +42,7 @@ class OptionOutput {
         this.selected = selected;
     }
 
-    public OptionOutput() {
+    public OptionOutputDto() {
     }
 
     public int getOptionId() {

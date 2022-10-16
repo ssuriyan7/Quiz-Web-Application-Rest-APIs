@@ -1,5 +1,7 @@
 package com.ssuriyan7.quizapplication.controller;
 
+import com.ssuriyan7.quizapplication.dto.OptionOutputDto;
+import com.ssuriyan7.quizapplication.dto.QuestionOutputDto;
 import com.ssuriyan7.quizapplication.entity.Option;
 import com.ssuriyan7.quizapplication.entity.Question;
 import com.ssuriyan7.quizapplication.entity.Quiz;
@@ -45,23 +47,23 @@ public class ApplicationController {
     }
 
     @GetMapping("/getQuestions")
-    public List<QuestionOutput> getQuestions(@RequestParam("quizid") String quizid) {
+    public List<QuestionOutputDto> getQuestions(@RequestParam("quizid") String quizid) {
         List<Question> questions =  questionRepository.findByQuizId(Integer.parseInt(quizid));
 
         for (int i = 0; i < questions.size(); i++) {
             List<Option> options = optionRepository.findByQuestionId(questions.get(i).getId());
             questions.get(i).setOptions(options);
         }
-        List<QuestionOutput> questionOutputs = new ArrayList<QuestionOutput>();
+        List<QuestionOutputDto> questionOutputs = new ArrayList<QuestionOutputDto>();
         for(int i = 0; i < questions.size(); i++) {
-            List<OptionOutput> optionOutput = new ArrayList<OptionOutput>();
+            List<OptionOutputDto> optionOutput = new ArrayList<OptionOutputDto>();
             List<Option> tempOptions = questions.get(i).getOptions();
             for (int j = 0; j < tempOptions.size();j++) {
-                optionOutput.add(new OptionOutput(tempOptions.get(j).getId(),tempOptions.get(j).getOptionText(),tempOptions.get(j).isCorrect(),tempOptions.get(j).getQuestion().getId(),false));
+                optionOutput.add(new OptionOutputDto(tempOptions.get(j).getId(),tempOptions.get(j).getOptionText(),tempOptions.get(j).isCorrect(),tempOptions.get(j).getQuestion().getId(),false));
             }
             System.out.println(optionOutput);
-            QuestionOutput questionOutput = new QuestionOutput(questions.get(i).getId(),questions.get(i).getQuestionText(),questions.get(i).getQuiz().getId(),optionOutput, questions.size());
-            questionOutputs.add(questionOutput);
+            QuestionOutputDto questionOutputDto = new QuestionOutputDto(questions.get(i).getId(),questions.get(i).getQuestionText(),questions.get(i).getQuiz().getId(),optionOutput, questions.size());
+            questionOutputs.add(questionOutputDto);
         }
         return questionOutputs;
     }
